@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_vertical"
     android:layout_gravity="center_vertical">
 <TextView
+    android:visibility="gone"
+    android:id="@+id/textview_inbox_count"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingTop="4dp"
     android:paddingBottom="4dp"
-    android:background="@color/md_teal_400"
-    android:text="23 new"
-    android:textColor="@color/md_white_1000"
+    android:background="?attr/colorAccent"
+    android:text="0 new"
+    android:textColor="@color/white"
+    tools:visibility="visible"
     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 </LinearLayout>

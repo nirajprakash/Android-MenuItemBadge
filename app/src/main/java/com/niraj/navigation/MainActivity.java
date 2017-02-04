@@ -19,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBar actionBar;
-    TextView textView;
+    //TextView textView;
 
-    private FrameLayout redCircle;
-    private TextView countTextView;
-    private int alertCount = 0;
+    private FrameLayout alertCircle;
+    private TextView alertCountTextView;
+    private int alertIconCount = 0;
+    private int navInboxCount = 0;
+    private TextView inboxCountTextView;
 
 
     @Override
@@ -38,12 +40,17 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
         if (navigationView != null) {
+
+            View inboxView = navigationView.getMenu().findItem(R.id.item_navigation_drawer_inbox).getActionView();
+            initNavigationInboxBadge(inboxView);
             setupNavigationDrawerContent(navigationView);
         }
+
 
         setupNavigationDrawerContent(navigationView);
     }
@@ -61,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.activity_main_update_menu_item:
-                alertCount = (alertCount + 1) % 11; // cycle through 0 - 10
-                updateAlertIcon();
+            case R.id.menu_main_alert_item:
+                alertIconCount = 0;
+                alertCircle.setVisibility((alertIconCount > 0) ? View.VISIBLE : View.GONE);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -71,25 +78,54 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        final MenuItem alertMenuItem = menu.findItem(R.id.activity_main_alerts_menu_item);
-        FrameLayout rootView = (FrameLayout) alertMenuItem.getActionView();
+        final MenuItem alertMenuItem = menu.findItem(R.id.menu_main_alert_item);
 
-        redCircle = (FrameLayout) rootView.findViewById(R.id.view_alert_red_circle);
-        countTextView = (TextView) rootView.findViewById(R.id.view_alert_count_textview);
+        initAlertBadge(alertMenuItem);
+
 
         return super.onPrepareOptionsMenu(menu);
     }
 
+    public void initNavigationInboxBadge(View view){
+        inboxCountTextView = (TextView) view.findViewById(R.id.textview_inbox_count);
+    }
 
-    private void updateAlertIcon() {
+    public void initAlertBadge(final MenuItem menuItem){
+        FrameLayout view = (FrameLayout) menuItem.getActionView();
+        alertCircle = (FrameLayout) view.findViewById(R.id.alert_circle);
+        alertCountTextView = (TextView) view.findViewById(R.id.textview_alert_count);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
+
+    }
+
+
+
+    public void updateAlertCount(View view) {
         // if alert count extends into two digits, just show the red circle
-        if (0 < alertCount && alertCount < 10) {
-            countTextView.setText(String.valueOf(alertCount));
+        alertIconCount = (alertIconCount + 1) % 20; // cycle through 0 - 10
+        if (0 < alertIconCount) {
+            alertCountTextView.setText(String.valueOf(alertIconCount));
         } else {
-            countTextView.setText("");
+            alertCountTextView.setText("");
         }
 
-        redCircle.setVisibility((alertCount > 0) ? View.VISIBLE : View.GONE);
+        alertCircle.setVisibility((alertIconCount > 0) ? View.VISIBLE : View.GONE);
+    }
+
+    public void updateInboxCount(View view){
+        navInboxCount = (navInboxCount + 1) % 20; // cycle through 0 - 10
+        if (0 < navInboxCount) {
+            inboxCountTextView.setText(String.valueOf(navInboxCount)+ " new");
+        } else {
+            inboxCountTextView.setText("");
+        }
+
+        inboxCountTextView.setVisibility((navInboxCount > 0) ? View.VISIBLE : View.GONE);
     }
 
     private void setupNavigationDrawerContent(NavigationView navigationView) {
@@ -97,31 +133,31 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        textView = (TextView) findViewById(R.id.textView);
+                        //textView = (TextView) findViewById(R.id.textView);
                         switch (menuItem.getItemId()) {
                             case R.id.item_navigation_drawer_inbox:
                                 menuItem.setChecked(true);
-                                textView.setText(menuItem.getTitle());
+                                //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_navigation_drawer_starred:
                                 menuItem.setChecked(true);
-                                textView.setText(menuItem.getTitle());
+                                //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_navigation_drawer_sent_mail:
                                 menuItem.setChecked(true);
-                                textView.setText(menuItem.getTitle());
+                                //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_navigation_drawer_drafts:
                                 menuItem.setChecked(true);
-                                textView.setText(menuItem.getTitle());
+                                //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_navigation_drawer_settings:
                                 menuItem.setChecked(true);
-                                textView.setText(menuItem.getTitle());
+                                //textView.setText(menuItem.getTitle());
                                 Toast.makeText(MainActivity.this, "Launching " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 //Intent intent = new Intent(MainActivity.this, SettingsActivity.class);

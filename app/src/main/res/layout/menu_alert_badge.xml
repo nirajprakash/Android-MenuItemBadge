@@ -2,8 +2,10 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:padding="8dp"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
     android:layout_gravity="center">
 
     <ImageView
@@ -13,20 +15,20 @@
         android:src="@drawable/ic_assignment_ind_white_24dp"/>
 
     <FrameLayout
-        android:id="@+id/view_alert_red_circle"
+        android:id="@+id/alert_circle"
         android:layout_width="14dp"
         android:layout_height="14dp"
         android:layout_gravity="top|end"
-        android:background="@drawable/dr_circle_white"
+        android:background="@drawable/dr_circle"
         android:visibility="gone"
         tools:visibility="visible">
 
         <TextView
-            android:id="@+id/view_alert_count_textview"
+            android:id="@+id/textview_alert_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/md_white_1000"
+            android:textColor="@color/white"
             android:textSize="10sp"
             tools:text="3"/>
 
