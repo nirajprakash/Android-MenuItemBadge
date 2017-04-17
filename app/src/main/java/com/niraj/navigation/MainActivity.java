@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (navigationView != null) {
 
-            View inboxView = navigationView.getMenu().findItem(R.id.item_navigation_drawer_inbox).getActionView();
+            View inboxView = navigationView.getMenu().findItem(R.id.navigation_menu_inbox).getActionView();
             initNavigationInboxBadge(inboxView);
             setupNavigationDrawerContent(navigationView);
         }
@@ -79,10 +79,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem alertMenuItem = menu.findItem(R.id.menu_main_alert_item);
-
         initAlertBadge(alertMenuItem);
-
-
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -135,27 +132,27 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         //textView = (TextView) findViewById(R.id.textView);
                         switch (menuItem.getItemId()) {
-                            case R.id.item_navigation_drawer_inbox:
+                            case R.id.navigation_menu_inbox:
                                 menuItem.setChecked(true);
                                 //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_starred:
+                            case R.id.navigation_menu_starred:
                                 menuItem.setChecked(true);
                                 //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_sent_mail:
+                            case R.id.navigation_menu_sent_mail:
                                 menuItem.setChecked(true);
                                 //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_drafts:
+                            case R.id.navigation_menu_drafts:
                                 menuItem.setChecked(true);
                                 //textView.setText(menuItem.getTitle());
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_settings:
+                            case R.id.navigation_menu_all_mail:
                                 menuItem.setChecked(true);
                                 //textView.setText(menuItem.getTitle());
                                 Toast.makeText(MainActivity.this, "Launching " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
@@ -163,7 +160,12 @@ public class MainActivity extends AppCompatActivity {
                                 //Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                                 //startActivity(intent);
                                 return true;
-                            case R.id.item_navigation_drawer_help_and_feedback:
+                            case R.id.navigation_menu_spam:
+                                menuItem.setChecked(true);
+                                Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                return true;
+                            case R.id.navigation_menu_trash:
                                 menuItem.setChecked(true);
                                 Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);

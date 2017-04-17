@@ -4,35 +4,38 @@
     <group android:checkableBehavior="single">
         <item
             android:checked="true"
-            android:id="@+id/item_navigation_drawer_inbox"
+            android:id="@+id/navigation_menu_inbox"
             android:icon="@drawable/ic_move_to_inbox_black_36dp"
-
             app:actionLayout="@layout/navigation_menu_inbox_badge"
             android:title="Inbox" />
         <item
-            android:id="@+id/item_navigation_drawer_starred"
+            android:id="@+id/navigation_menu_starred"
             android:icon="@drawable/ic_star_black_36dp"
             android:title="Starred" />
         <item
-            android:id="@+id/item_navigation_drawer_sent_mail"
+            android:id="@+id/navigation_menu_sent_mail"
             android:icon="@drawable/ic_send_black_36dp"
             android:title="Sent mail" />
         <item
-            android:id="@+id/item_navigation_drawer_drafts"
+            android:id="@+id/navigation_menu_drafts"
             android:icon="@drawable/ic_drafts_black_36dp"
             android:title="Drafts" />
     </group>
 
-    <item android:title="Subheader">
-        <menu>
+    <group android:id="@+id/group_sub">
+
             <item
-                android:id="@+id/item_navigation_drawer_settings"
+                android:id="@+id/navigation_menu_all_mail"
                 android:icon="@drawable/ic_mail_black_36dp"
-                android:title="Settings" />
+                android:title="All mail" />
             <item
-                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:id="@+id/navigation_menu_spam"
+                android:icon="@drawable/ic_report_black_36dp"
+                android:title="Spam" />
+            <item
+                android:id="@+id/navigation_menu_trash"
                 android:icon="@drawable/ic_delete_black_36dp"
-                android:title="Help and feedback" />
-        </menu>
-    </item>
+                android:title="Trash" />
+
+    </group>
 </menu>
